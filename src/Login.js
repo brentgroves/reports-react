@@ -75,6 +75,9 @@ const Login = () => {
             >
               Signup
             </button>
+            <a class="button button-primary block" href="/oauth/github">
+              Login with GitHub
+            </a>            
           </form>
         </div>
       </div>
