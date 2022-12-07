@@ -78,6 +78,9 @@ const Login = () => {
             <a class="button button-primary block" href="/oauth/github">
               Login with GitHub
             </a>            
+            <a class="button button-primary block" href="/oauth/auth0">
+              Login with Auth0
+            </a>            
           </form>
         </div>
       </div>

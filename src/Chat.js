@@ -41,6 +41,7 @@ const Chat = ({ users, messages }) => {
       <header className="title-bar flex flex-row flex-center">
         <div className="title-wrapper block center-element">
           <img
+            crossOrigin='anonymous'
             className="logo"
             src="http://feathersjs.com/img/feathers-logo-wide.png"
             alt="Feathers Logo"
@@ -62,7 +63,7 @@ const Chat = ({ users, messages }) => {
             {users.map(user => (
               <li key={user._id}>
                 <a className="block relative" href="#">
-                  <img src={user.avatar} alt={user.email} className="avatar" />
+                  <img crossOrigin='anonymous' src={user.avatar} alt={user.email} className="avatar" />
                   <span className="absolute username">{user.email}</span>
                 </a>
               </li>
