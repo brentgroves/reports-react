@@ -46,10 +46,15 @@ const Application = () => {
       setMessages([]);
       setUsers([]);
     });
-
+// https://meticulous.ai/blog/getting-started-with-react-logging/
     // Add new messages to the message list
-    messagesService.on('created', message =>
+    // messagesService.on('created', message =>
+    //   console.log("message =" + JSON.stringify(message))
+    // );
+    messagesService.on('created', message => {
       setMessages(currentMessages => currentMessages.concat(message))
+      console.log(JSON.stringify(message))    
+    }     
     );
 
     // Add new users to the user list

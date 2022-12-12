@@ -40,12 +40,7 @@ const Chat = ({ users, messages }) => {
     <main className="flex flex-column">
       <header className="title-bar flex flex-row flex-center">
         <div className="title-wrapper block center-element">
-          <img
-            crossOrigin='anonymous'
-            className="logo"
-            src="http://feathersjs.com/img/feathers-logo-wide.png"
-            alt="Feathers Logo"
-          />
+          <img crossOrigin='anonymous' className="logo" src="http://feathersjs.com/img/feathers-logo-wide.png" alt="Feathers Logo" />
           <span className="title">Chat</span>
         </div>
       </header>
@@ -84,11 +79,7 @@ const Chat = ({ users, messages }) => {
           <main className="chat flex flex-column flex-1 clear" ref={chatRef}>
             {messages.map(message => (
               <div key={message._id} className="message flex flex-row">
-                <img
-                  src={message.user.avatar}
-                  alt={message.user.email}
-                  className="avatar"
-                />
+                <img crossOrigin='anonymous' src={message.user.avatar} alt={message.user.email} className="avatar" />
                 <div className="message-wrapper">
                   <p className="message-header">
                     <span className="username font-600">
