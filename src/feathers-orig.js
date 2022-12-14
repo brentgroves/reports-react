@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 
 const socket = io('http://localhost:3030');
 const client = feathers();
-// https://docs.feathersjs.com/api/client.html#node
+
 client.configure(socketio(socket));
 client.configure(
   feathers.authentication({

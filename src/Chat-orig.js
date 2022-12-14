@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import moment from 'moment';
 import client from './feathers';
-import jwt_decode from "jwt-decode";
 
 const Chat = ({ users, messages }) => {
   const chatRef = useRef(null);
@@ -26,7 +25,6 @@ const Chat = ({ users, messages }) => {
     let chat = chatRef.current;
     chat.scrollTop = chat.scrollHeight - chat.clientHeight;
   }
-
 
   useEffect(() => {
     client.service('messages').on('created', scrollToBottom);
@@ -67,52 +65,9 @@ const Chat = ({ users, messages }) => {
             ))}
           </ul>
           <footer className="flex flex-row flex-center">
-          {/* https://docs.feathersjs.com/api/authentication/client.html#configuration */}
-          {/* https://ui.vision/howto/view-local-storage */}
-          {/* https://docs.feathersjs.com/api/authentication/client.html#storage */}
-          {/* https://community.auth0.com/t/login-as-different-user-after-logout/68121 */}
-          {/* https://auth0.com/docs/authenticate/login/logout */}
-          {/* https://auth0.com/docs/api/authentication#logout */}
             <a
               href="#"
-              onClick={() => {
-                const promise = new Promise(async (resolve, reject) => {
-                  // const { accessToken } = await client.get('authentication');
-                  // resolve(jwt_decode(accessToken))
-                  const { user } = await client.get('authentication');
-                  resolve(user)
-                  // resolve('We did it!')
-                })                
-                promise.then((response) => {
-                  console.log(response)
-                })
-              }}
-              className="button button-primary"
-            >
-              Get User
-            </a>
-            <a
-              href="#"
-              onClick={() => {
-                const promise = new Promise(async (resolve, reject) => {
-                  const { accessToken } = await client.get('authentication');
-                  resolve(jwt_decode(accessToken))
-                })                
-                promise.then((response) => {
-                  console.log(response)
-                })
-              }}
-              className="button button-primary"
-            >
-              Get Token
-            </a>
-
-            <a
-              href="https://dev-gfcd1ld5m2jtz0m0.us.auth0.com/v2/logout?federated&client_id=IGs15ncDb9uKQujCzzSYUm8qFgnqaTE5&returnTo=http://localhost:3000"
-              onClick={() => {
-                client.logout();
-                return true;
-              }}
+              onClick={() => client.logout()}
               className="button button-primary"
             >
               Sign Out

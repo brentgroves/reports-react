@@ -81,6 +81,9 @@ const Login = () => {
             <a class="button button-primary block" href="http://localhost:3030/oauth/auth0">
               Login with Auth0
             </a>            
+            <a class="button button-primary block" href="http://localhost:3030/oauth/microsoft">
+              Login with OAuth
+            </a>            
           </form>
         </div>
       </div>
