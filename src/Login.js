@@ -60,21 +60,21 @@ const Login = () => {
               />
             </fieldset>
 
-            <button
+            {/* <button
               type="button"
               className="button button-primary block signup"
               onClick={() => login()}
             >
               Log in
-            </button>
+            </button> */}
 
-            <button
+            {/* <button
               type="button"
               className="button button-primary block signup"
               onClick={() => signup()}
             >
               Signup
-            </button>
+            </button> */}
             <a class="button button-primary block" href="/oauth/github">
               Login with GitHub
             </a>            
