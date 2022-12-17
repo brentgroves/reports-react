@@ -17,6 +17,9 @@ const Application = () => {
       setLogin(null);
     });
 
+    // https://docs.feathersjs.com/api/authentication/service.html#app-on-login
+    // app.on('login')
+
     // On successfull login
     client.on('authenticated', loginResult => {
       // Get all users and messages
@@ -39,6 +42,7 @@ const Application = () => {
         setUsers(usersResult);
       });
     });
+
 
     // On logout reset all all local state (which will then show the login screen)
     client.on('logout', () => {
