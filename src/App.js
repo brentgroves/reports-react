@@ -43,6 +43,10 @@ const Application = () => {
       });
     });
 
+    // On logout reset all all local state (which will then show the login screen)
+    client.on('login', (authResult) => {
+      console.log('in login')
+    });
 
     // On logout reset all all local state (which will then show the login screen)
     client.on('logout', () => {
