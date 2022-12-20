@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Login from './Login';
+import Enter from './Enter';
 import Chat from './Chat';
 import client from './feathers';
 
@@ -15,13 +16,15 @@ const Application = () => {
   useEffect(() => {
     // Try to authenticate with the JWT stored in localStorage
     client.authenticate().catch(() => {
+      setLogin(null);
       const params = new URLSearchParams(window.location.search)
-      const auth = params.get('email')
-      if (auth === undefined) {
-        setLogin(null);
-      }else{
-        setEmail(auth);
-      }
+      const email_param = params.get('email')
+      setEmail(email_param);
+      // if (email_param === null) {
+      //   setEmail(null);
+      // }else{
+      //   setEmail(auth);
+      // }
 
       // if (session_id === '') {
       // } else {
@@ -63,9 +66,9 @@ const Application = () => {
     });
 
     // On logout reset all all local state (which will then show the login screen)
-    client.on('login', (authResult) => {
-      console.log('in login')
-    });
+    // client.on('login', (authResult) => {
+    //   console.log('in login')
+    // });
 
     // On logout reset all all local state (which will then show the login screen)
     client.on('logout', () => {
@@ -91,16 +94,15 @@ const Application = () => {
   }, []);
 
   // https://flaviocopes.com/urlsearchparams/
-  const params = new URLSearchParams(window.location.search)
-  const session_id = params.get('session_id')
-  console.log(session_id)
+  // const params = new URLSearchParams(window.location.search)
+  // const email = params.get('email')
   if (login === undefined) {
     return (
       <main className="container text-center">
         <h1>Loading...</h1>
       </main>
     );
-  } else if (email !== undefined) {
+  } else if ((login === null) && (email !== undefined) && (email !== null)) {
     return <Enter email={email} />;
   } else if (login) {
     return <Chat messages={messages} users={users} />;
