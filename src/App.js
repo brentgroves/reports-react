@@ -8,25 +8,31 @@ const usersService = client.service('users');
 
 const Application = () => {
   const [login, setLogin] = useState(null);
+  const [email, setEmail] = useState(null);
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     // Try to authenticate with the JWT stored in localStorage
     client.authenticate().catch(() => {
-      setLogin(null);
       const params = new URLSearchParams(window.location.search)
-      const session_id = params.get('session_id')
-      if (session_id === '') {
-      } else {
-        client
-        .authenticate({
-          strategy: 'local',
-          email:'brentgroves@1hkt5t.onmicrosoft.com',
-          password:'passwordless'
-        })
-        .catch(err => console.log('auth error'));      
+      const auth = params.get('email')
+      if (auth === undefined) {
+        setLogin(null);
+      }else{
+        setEmail(auth);
       }
+
+      // if (session_id === '') {
+      // } else {
+      //   client
+      //   .authenticate({
+      //     strategy: 'local',
+      //     email:'brentgroves@1hkt5t.onmicrosoft.com',
+      //     password:'passwordless'
+      //   })
+      //   .catch(err => console.log('auth error'));      
+      // }
     
     });
 
@@ -94,6 +100,8 @@ const Application = () => {
         <h1>Loading...</h1>
       </main>
     );
+  } else if (email !== undefined) {
+    return <Enter email={email} />;
   } else if (login) {
     return <Chat messages={messages} users={users} />;
   }
