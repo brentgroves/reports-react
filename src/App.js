@@ -15,11 +15,24 @@ const Application = () => {
     // Try to authenticate with the JWT stored in localStorage
     client.authenticate().catch(() => {
       setLogin(null);
+      const params = new URLSearchParams(window.location.search)
+      const session_id = params.get('session_id')
+      if (session_id === '') {
+      } else {
+        client
+        .authenticate({
+          strategy: 'local',
+          email:'brentgroves@1hkt5t.onmicrosoft.com',
+          password:'passwordless'
+        })
+        .catch(err => console.log('auth error'));      
+      }
+    
     });
 
     // https://docs.feathersjs.com/api/authentication/service.html#app-on-login
     // app.on('login')
-
+    // https://fusebit.io/blog/oauth-state-parameters-nodejs/?utm_source=www.google.com&utm_medium=referral&utm_campaign=none
     // On successfull login
     client.on('authenticated', loginResult => {
       // Get all users and messages
@@ -71,6 +84,10 @@ const Application = () => {
     );
   }, []);
 
+  // https://flaviocopes.com/urlsearchparams/
+  const params = new URLSearchParams(window.location.search)
+  const session_id = params.get('session_id')
+  console.log(session_id)
   if (login === undefined) {
     return (
       <main className="container text-center">
