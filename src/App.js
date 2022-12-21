@@ -106,9 +106,11 @@ const Application = () => {
     return <Enter email={email} />;
   } else if (login) {
     return <Chat messages={messages} users={users} />;
+  }  else {
+    return <Enter email={null} />;
   }
-
-  return <Login />;
+ 
+  // return <Enter />;
 };
 
 export default Application;
