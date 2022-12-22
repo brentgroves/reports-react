@@ -10,6 +10,7 @@ const usersService = client.service('users');
 const Application = () => {
   const [login, setLogin] = useState(null);
   const [email, setEmail] = useState(null);
+  const [given_name, setGivenName] = useState(null);
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -44,6 +45,7 @@ const Application = () => {
     // https://fusebit.io/blog/oauth-state-parameters-nodejs/?utm_source=www.google.com&utm_medium=referral&utm_campaign=none
     // On successfull login
     client.on('authenticated', loginResult => {
+      setGivenName(loginResult.user.given_name);
       // Get all users and messages
       Promise.all([
         messagesService.find({
@@ -88,8 +90,14 @@ const Application = () => {
     );
 
     // Add new users to the user list
-    usersService.on('created', user =>
-      setUsers(currentUsers => currentUsers.concat(user))
+    usersService.on('created', user => {
+      exists = currentUsers.find(user);
+      if (exists === undefined) 
+      {
+        setUsers(currentUsers => currentUsers.concat(user))
+      }      
+
+      }
     );
   }, []);
 
@@ -103,7 +111,7 @@ const Application = () => {
       </main>
     );
   } else if ((login === null) && (email !== undefined) && (email !== null)) {
-    return <Enter email={email} />;
+    return <Enter email={email} given_name={given_name} />;
   } else if (login) {
     return <Chat messages={messages} users={users} />;
   }  else {

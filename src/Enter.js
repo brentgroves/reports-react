@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import client from './feathers';
 
-const Enter = ({ email }) => {
+const Enter = ({ email, given_name }) => {
   // const [email, setEmail] = useState();
   // const [password, setPassword] = useState();
   const [error, setError] = useState();
@@ -21,7 +21,7 @@ const Enter = ({ email }) => {
       <a class="button button-primary block" href="http://localhost:3030/auth">
         Sign In
       </a>;
-  } else {
+  } else if (given_name===null) {
     login_button =            
       <button
       type="button"
@@ -29,6 +29,15 @@ const Enter = ({ email }) => {
       onClick={() => enter()}
       >
       Login 
+      </button>;
+  } else if (given_name!==null) {
+    login_button =            
+      <button
+      type="button"
+      className="button button-primary block signup"
+      onClick={() => enter()}
+      >
+      Login as {given_name}
       </button>;
   }
   var signout_button;
