@@ -16,7 +16,9 @@ const Application = () => {
 
   
   useEffect(() => {
+    // https://stackoverflow.com/questions/68213212/why-is-this-api-call-being-called-twice-in-react
     messagesService.on('created', message => {
+
       setMessages(currentMessages => currentMessages.concat(message))
     });
   
