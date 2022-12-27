@@ -29,13 +29,13 @@ const Chat = ({ users, messages }) => {
 
 
   useEffect(() => {
-    // client.service('messages').on('created', scrollToBottom);
-    // scrollToBottom();
+    client.service('messages').on('created', scrollToBottom);
+    scrollToBottom();
 
-    // return () => {
-    //   // Clean up listeners
-    //   client.service('messages').removeListener('created', scrollToBottom);
-    // };
+    return () => {
+      // Clean up listeners
+      client.service('messages').removeListener('created', scrollToBottom);
+    };
   });
 
   return (

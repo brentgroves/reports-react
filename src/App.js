@@ -14,14 +14,41 @@ const Application = () => {
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
 
+  useEffect(() => {
+    client.service('messages').on('created', scrollToBottom);
+    scrollToBottom();
+
+    return () => {
+      // Clean up listeners
+      client.service('messages').removeListener('created', scrollToBottom);
+    };
+  });
   
   useEffect(() => {
-    // https://stackoverflow.com/questions/68213212/why-is-this-api-call-being-called-twice-in-react
-    messagesService.on('created', message => {
 
+    function addMessage(message) {
       setMessages(currentMessages => currentMessages.concat(message))
-    });
+    }
   
+    // https://stackoverflow.com/questions/68213212/why-is-this-api-call-being-called-twice-in-react
+    messagesService.on('created', addMessage);
+    return () => {
+      // Clean up listeners
+      messagesService.removeListener('created', addMessage);
+    };
+  
+ 
+    });
+
+ 
+  useEffect(() => {
+    function addMessage(message) {
+      setMessages(currentMessages => currentMessages.concat(message))
+    }
+  
+    // https://stackoverflow.com/questions/68213212/why-is-this-api-call-being-called-twice-in-react
+    messagesService.on('created', addMessage);
+
     // Try to authenticate with the JWT stored in localStorage
     client.authenticate().catch(() => {
       setLogin(null);
@@ -139,6 +166,13 @@ const Application = () => {
 
       // }
   });
+
+  return () => {
+    // Clean up listeners
+    messagesService.removeListener('created', addMessage);
+  };
+
+
     // https://stackoverflow.com/questions/55840294/how-to-fix-missing-dependency-warning-when-using-useeffect-react-hook
   // } );
   }, []);
