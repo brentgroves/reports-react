@@ -4,6 +4,7 @@ import Enter from './Enter';
 import Chat from './Chat';
 import client from './feathers';
 
+Study  https://reactjs.org/docs/hooks-effect.html  
 App component:
 - display Login or Chat component
 - subscribe to authenticated event
