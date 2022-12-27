@@ -4,6 +4,29 @@ import Enter from './Enter';
 import Chat from './Chat';
 import client from './feathers';
 
+App component:
+- display Login or Chat component
+- subscribe to authenticated event
+- get messages and users
+- pass messages and users to Chat component.
+
+Login component 
+- display 'Login' or 'Login as email'
+- display 'signout of account'
+- redirect /auth
+- call Microsoft login 
+- redirect /auth-callback
+- redirect /?email=user-email
+- login to user account.
+Chat component
+- display Chat component
+- display signout button
+- has users and messages state
+- subscribe to create message and user events
+- concatenates new users and messages to array
+- reverses message array and trims to 25 messages
+- unsubscribes to create user and message events
+
 const messagesService = client.service('messages');
 const usersService = client.service('users');
 
