@@ -71,22 +71,22 @@ const Application = () => {
       setEmail(email_param);
     
     });
-    if (login === undefined) {
-      return (
-        <main className="container text-center">
-          <h1>Loading...</h1>
-        </main>
-      );
-    } else if ((login === null) && (email !== undefined) && (email !== null)) {
-      return <Enter email={email} given_name={given_name} />;
-    } else if (login) {
-      return <Chat messages={messages} users={users} />;
-    }  else {
-      return <Enter email={null} />;
-    }
     // https://stackoverflow.com/questions/55840294/how-to-fix-missing-dependency-warning-when-using-useeffect-react-hook
   // } );
   }, []);
+  if (login === undefined) {
+    return (
+      <main className="container text-center">
+        <h1>Loading...</h1>
+      </main>
+    );
+  } else if ((login === null) && (email !== undefined) && (email !== null)) {
+    return <Enter email={email} given_name={given_name} />;
+  } else if (login) {
+    return <Chat messages={messages} users={users} />;
+  }  else {
+    return <Enter email={null} />;
+  }
 
 };
 
