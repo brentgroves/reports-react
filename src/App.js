@@ -14,7 +14,12 @@ const Application = () => {
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
 
+  
   useEffect(() => {
+    messagesService.on('created', message => {
+      setMessages(currentMessages => currentMessages.concat(message))
+    });
+  
     // Try to authenticate with the JWT stored in localStorage
     client.authenticate().catch(() => {
       setLogin(null);
@@ -83,22 +88,57 @@ const Application = () => {
     // messagesService.on('created', message =>
     //   console.log("message =" + JSON.stringify(message))
     // );
-    messagesService.on('created', message => {
-      setMessages(currentMessages => currentMessages.concat(message))
-      console.log(JSON.stringify(message))    
-    }     
-    );
+    // function checkMessages(message) {
+    //   return message._id == id;
+    // }    
+    // messagesService.on('created', message => {
+    //   setMessages(currentMessages => currentMessages.concat(message))
+
+      // Promise.all([
+      //   messagesService.find({
+      //     query: {
+      //       $sort: { createdAt: -1 },
+      //       $limit: 25,
+      //     },
+      //   })
+      // ]).then(([messagePage]) => {
+      //   // We want the latest messages but in the reversed order
+      //   const messagesResult = messagePage.data.reverse();
+      //   setMessages(messagesResult);
+      // });
+      // const exists = messages;
+      // if(messages.length>0)
+      // {
+      //   const exists = messages.find(function (element) {
+      //     return element._id === message._id;
+      //   });
+      //   if (exists === undefined) 
+      //   {
+      //     setMessages(message => messages.concat(message))
+      //   }      
+      // }
+      // else 
+      // {
+      //   setMessages(message => messages.concat(message))
+      // }  
+      // setMessages(currentMessages => currentMessages.concat(message))
+      // console.log(JSON.stringify(message))    
+    // });
 
     // Add new users to the user list
     usersService.on('created', user => {
-      exists = currentUsers.find(user);
-      if (exists === undefined) 
-      {
-        setUsers(currentUsers => currentUsers.concat(user))
-      }      
+      setUsers(currentUsers => currentUsers.concat(user))
 
-      }
-    );
+      // const exists = users.find(user);
+      // if (exists === undefined) 
+      // {
+      //   setUsers(users => users.concat(user))
+      // }      
+
+      // }
+  });
+    // https://stackoverflow.com/questions/55840294/how-to-fix-missing-dependency-warning-when-using-useeffect-react-hook
+  // } );
   }, []);
 
   // https://flaviocopes.com/urlsearchparams/
