@@ -68,6 +68,11 @@ const Enter = ({ email, given_name }) => {
         <div className="col-12 col-6-tablet push-3-tablet col-4-desktop push-4-desktop">
           <form className="form">
             {login_button}
+            login_button =            
+      <a class="button button-primary block" href="http://localhost:3030/oauth/microsoft">
+        Log In for Microsoft
+      </a>;
+
             {signout_button}
           </form>
         </div>
